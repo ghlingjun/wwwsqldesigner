@@ -29,10 +29,12 @@ SQL.Row.prototype._build = function() {
 	var td1 = OZ.DOM.elm("td");
 	var td2 = OZ.DOM.elm("td", {className:"typehint"});
 	this.dom.typehint = td2;
+	var td3 = OZ.DOM.elm("td", {className:"fieldComment"});
+	this.dom.fieldComment = td3;
 
 	OZ.DOM.append(
 		[this.dom.container, this.dom.content],
-		[this.dom.content, td1, td2],
+		[this.dom.content, td1, td2, td3],
 		[td1, this.dom.selected, this.dom.title]
 	);
 	
@@ -252,6 +254,9 @@ SQL.Row.prototype.redraw = function() {
 	}
 
 	this.dom.typehint.innerHTML = typehint.join(" ");
+
+	this.dom.fieldComment.innerHTML = this.data.comment;
+
 	this.owner.redraw();
 	this.owner.owner.rowManager.redraw();
 }
